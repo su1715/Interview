@@ -1,4 +1,5 @@
 - 최적화한 경험이 있는지 (필자 : API요청 최소화한 사례?)
+
 - event driven과 component driven 의 차이
 
 # 제너레이터
@@ -131,19 +132,19 @@ forEach는 배열 내의 모든 요소에 대해 콜백함수를 실행한다. �
 
 ## this 의 바인딩 방식
 
-    javascript 에서 this의 바인딩 방식은 함수를 호출할 때 결정된다.
+javascript 에서 this의 바인딩 방식은 함수를 호출할 때 결정된다.
 
-    같은 함수를 선언해도 일반함수로 호출하면 this에 전역객체가 바인딩된다.
+같은 함수를 선언해도 일반함수로 호출하면 this에 전역객체가 바인딩된다.
 
-    (브라우저는 Window, Node.js 는 Global, ‘use strict’ 를 사용하면 undefined)
+(브라우저는 Window, Node.js 는 Global, ‘use strict’ 를 사용하면 undefined)
 
-    객체의 메소드로 호출하면 this에 객체가 바인딩된다.
+객체의 메소드로 호출하면 this에 객체가 바인딩된다.
 
-    생성자 함수로 호출하면 this에 생성자 함수로 인해 생성된 객체가 바인딩 된다.
+생성자 함수로 호출하면 this에 생성자 함수로 인해 생성된 객체가 바인딩 된다.
 
 ## 화살표 함수의 this
 
-    화살표 함수는 this가 바인딩 되지 않아 상위 스코프의 this를 사용한다.
+화살표 함수는 this가 바인딩 되지 않아 상위 스코프의 this를 사용한다.
 
 # JS는 싱글 스레드인데 비동기가 가능한 이유는?
 
