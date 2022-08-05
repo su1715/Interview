@@ -1,6 +1,34 @@
-- event driven과 component driven 의 차이
+# 제너레이터
 
-- 제너레이터
+코드 블록의 실행을 일시 중지했다가 필요한 시점에 재개할 수 있는 특수한 함수다.
+
+제너레이터 함수와 일반함수의 차이는 다음과 같다.
+
+1. 제너레이터 함수는 함수 호출자에게 함수 실행의 제어권을 양도할 수 있다.
+
+2. 제너레이터 함수는 함수 호출자와 상태를 주고받을 수 있다.
+   제너레이터 함수는 함수 호출자에게 상태를 전달할 수 있고 함수 호출자로부터 상태를 전달받을 수도 있다.
+
+3. 제너레이터 함수를 호출하면 제너레이터 객체를 반환한다.
+   일반 함수를 호출하면 함수 코드를 일괄실행하고 값을 반환한다. 제너레이터 함수를 호출하면 함수 코드를 실행하는 것이 아니라 제너레이터 객체를 반환한다.
+
+```javascript
+function* getGenerator() {
+  yield 1;
+  yield 2;
+  yield 3;
+  yield 4;
+  return 5;
+}
+
+const generator = getGenerator();
+console.log(generator.next()); // { value: 1, done: false }
+console.log(generator.next()); // { value: 2, done: false }
+console.log(generator.next()); // { value: 3, done: false }
+console.log(generator.next()); // { value: 4, done: false }
+console.log(generator.next()); // { value: 5, done: true }
+console.log(generator.next()); // { value: undefined, done: true }
+```
 
 # 얕은 복사 | 깊은 복사 하는 방법 (직접)
 
