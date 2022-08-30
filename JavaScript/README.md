@@ -60,12 +60,12 @@ console.log(generator.next()); // { value: undefined, done: true }
 
    ```javascript
    const deepCopy = (obj) => {
-     if (typeof obj === null || typeof obj !== 'object') {
+     if (obj === null || typeof obj !== 'object') {
        return obj;
      }
 
-     const copy = {};
-     for (let key in obj) {
+     const copy = Array.isArray(obj) ? [] : {};
+     for (const key of Object.keys(obj)) {
        copy[key] = deepCopy(obj[key]);
      }
      return copy;
@@ -112,7 +112,7 @@ ES6 의 순회 가능한 데이터 컬렉션, 즉 베열, 문자열, 유사 배�
 
 이터레이션 프로토콜에는 이터러블 프로토콜, 이터레이터 프로토콜이 있다. 이중 이터러블 프로토콜을 준수한 객체를 이터러블이라고 한다.
 
-즉 이터러블은 Symbol.iterator를 프로퍼티 키로 사용한 메스드를 직접 구현하거나 프로토타입 체인을 통해 상속받은 객체를 말한다.
+즉 이터러블은 Symbol.iterator를 프로퍼티 키로 사용한 메소드를 직접 구현하거나 프로토타입 체인을 통해 상속받은 객체를 말한다.
 
 내장된 생성자 중 iterable 객체를 만들어내는 생성자에는 아래와 같은 것들이 있다.
 
@@ -132,7 +132,9 @@ ES6 의 순회 가능한 데이터 컬렉션, 즉 베열, 문자열, 유사 배�
 
 # 프로토타입
 
-프로토타입은 어떤 객체의 상위 객체 역할을 하는 객체. 하위 객체에 공유 프로퍼티를 제공함으로써 객체지향 프로그래밍의 상속을 구현한다.
+어떤 객체의 상위 객체 역할을 하는 객체.
+
+하위 객체에 공유 프로퍼티를 제공함으로써 객체지향 프로그래밍의 상속을 구현한다.
 
 프로토타입을 상속 받은 하위 객체(인스턴스, 프로토타입)는 상위 객체의 프로퍼티, 메소드를 자신의 것처럼 자유롭게 사용할 수 있다.
 
@@ -148,7 +150,19 @@ ES6 의 순회 가능한 데이터 컬렉션, 즉 베열, 문자열, 유사 배�
 
 1. HTML 요소의 어트리뷰트로 등록
 
+`<input type="button" onclick="alert('alert!');" value="button" />`
+
 2. DOM 노드 객체의 이벤트 핸들러 프로퍼티에 등록 : getElementById 같은 함수로 DOM 노드 객체를 가져올 수 있다.
+
+```javascript
+  <input type="button" id="target" value="button" />
+  <script>
+    const target = document.getElementById('target');
+    target.onclick = function(){
+      alert('jin seok');
+    }
+</script>
+```
 
 3. addEventListener 사용
 
@@ -164,7 +178,7 @@ ES6 의 순회 가능한 데이터 컬렉션, 즉 베열, 문자열, 유사 배�
 
 ## 이벤트 위임
 
-하위 DOM 요소 여러개에 모두 이벤트 핸들러를 등록하는 대신 상위 DOM 요소 하나에 이벤트 핸들러를 등록하는 것.
+하위 DOM 요소 여러 개에 모두 이벤트 핸들러를 등록하는 대신 상위 DOM 요소 하나에 이벤트 핸들러를 등록하는 것.
 
 이벤트 핸들러를 하위 DOM 요소에 일일이 등록하면 하위 DOM 요소가 많아질수록 성능저하가 일어나고, 유지보수하기 힘들어진다.
 
@@ -320,7 +334,7 @@ javascript 에서 this의 바인딩 방식은 함수를 호출할 때 결정된�
 
 비동기란 ? 현재 실행중인 태스크가 완료되지 않아도 다음 태스크를 곧바로 실행하는 방식
 
-자바스크립트는 싱글 스레드로 동작하지만 브라우저같은 런타임환경은 멀티 스레드로 동작하기 때문이다. 브라우저나 node.js 같은 런타임 환경에서 이벤트 루프와 태스크 큐를 제공한다. (nodejs도?)
+자바스크립트는 싱글 스레드로 동작하지만 브라우저같은 런타임환경은 멀티 스레드로 동작하기 때문이다. 브라우저나 node.js 같은 런타임 환경에서 이벤트 루프와 태스크 큐를 제공한다.
 
 태스크 큐 : 비동기함수의 콜백함수나 이벤트 핸들러가 일시적으로 보관되는 영역
 
